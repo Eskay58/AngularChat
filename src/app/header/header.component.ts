@@ -10,6 +10,7 @@ import { SessionService } from '../service/session.service';
 })
 export class HeaderComponent implements OnInit {
   login: boolean;
+  userName: string = 'guest';
 
   constructor(
     private sessionService: SessionService,
@@ -20,12 +21,15 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
     this.sessionService.sessionState.subscribe((session: Session) => {
       if(session){
-        this.login = session.get();
+        this.login = session.isLogin;
+        this.userName = session.user.name;
       }
     });
+    
   }
 
   logout() {
     this.sessionService.logout();
   }
+  
 }

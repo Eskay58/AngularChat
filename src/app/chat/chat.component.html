@@ -1,10 +1,10 @@
 <div class="page">
   <section class="card">
     <div class="card-header">
-      NgChat
+      AmanoChat
     </div>
     <div class="card-body">
-      <ng-container *ngFor="let comment of comments">
+      <!-- <ng-container *ngFor="let comment of comments">
         <div class="media">
           <div class="media-left" *ngIf="anotherUser.uid === comment.user.uid">
             <a href="#" class="icon-rounded">{{ comment.user.name.slice(0, 1) }}</a>
@@ -13,14 +13,27 @@
             <h4 class="media-heading">{{comment.user.name}} Date:{{comment.date | chatDate}}</h4>
             <div>{{comment.content}}</div>
           </div>
-          <div class="media-right" *ngIf="currentUser.uid === comment.user.uid">
-            <a href="#" class="icon-rounded">{{ comment.user.name.slice(0, 1) }}</a>
+        </div>
+        <hr>
+      </ng-container> -->
+      
+      <ng-container *ngFor="let item of items | async">
+        <div class="media">
+          <div class="media-left" *ngIf="item.user.uid !== currentUser.uid">
+            <a href="#" class="icon-rounded">{{ item.user.name.slice(0, 1) }}</a>
+          </div>
+          <div class="media-body">
+            <h4 class="media-heading">{{ item.user.name }} Date:{{item.date | chatDate}}</h4>
+            <div>{{ item.content }}</div>
+          </div>
+          <div class="media-right" *ngIf="item.user.uid === currentUser.uid">
+            <a href="#" class="icon-rounded">{{ item.user.name.slice(0, 1) }}</a>
           </div>
         </div>
         <hr>
       </ng-container>
-
-  <section>
+    </div> 
+      
     <form class="chart-form" (submit)="addComment(content)">
       <div class="input-group">
         <input type="text" class="form-control" [(ngModel)]="content" name="Comment" placeholder="Comment">
@@ -29,5 +42,5 @@
         </div>
       </div>
     </form>
-  </section>
+  </section>  
 </div>

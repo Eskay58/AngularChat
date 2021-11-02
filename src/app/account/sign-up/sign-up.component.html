@@ -1,14 +1,30 @@
 <div class="page">
   <section class="card">
-    <form class="form-signup">
+    <form class="form-signup"
+    (submit)="submitSignUp()"
+    #signUpForm="ngForm">
         <h2 class="form-signup-heading">アカウント作成</h2>
-        <label for="inputEmail" class="sr-only">Email address</label>
-        <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+        <label for="inputName" class="sr-only">Name</label>
+        <input [(ngModel)]="account.name" name="name" 
+        type="text" id="inputName" 
+        class="form-control" placeholder="Name" required autofocus
+        #name="ngModel">
+        <label for="inputEmail"  class="sr-only">Email address</label>
+        <input [(ngModel)]="account.email" name="email" 
+        type="email" id="inputEmail" 
+        class="form-control" placeholder="Email address" required autofocus
+        #email="ngModel">
         <label for="inputPassword" class="sr-only">Password</label>
-        <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+        <input [(ngModel)]="account.password" name="password" 
+        type="password" id="inputPassword" 
+        class="form-control" placeholder="Password" required
+        #password="ngModel">
         <label for="confirmationPassword" class="sr-only">Password</label>
-        <input type="password" id="confirmationPassword" class="form-control" placeholder="Password Confirmation" required>
-        <button class="btn btn-lg btn-success btn-block" type="submit">SIGN UP</button>
+        <input [(ngModel)]="account.passwordConfirmation" name="confirmation" 
+        type="password" id="confirmationPassword" 
+        class="form-control" placeholder="Password Confirmation" required
+        #password_confirmation="ngModel">
+        <button class="btn btn-lg btn-success btn-block" type="submit" [disabled]="!signUpForm.form.valid">SIGN UP</button>
     </form>
     <a routerLink="/account/login"class="signup-link">ログインする</a>
   </section>

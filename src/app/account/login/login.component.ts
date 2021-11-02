@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Account } from 'src/app/class/chat';
 import { SessionService } from 'src/app/service/session.service';
 
 @Component({
@@ -6,7 +7,9 @@ import { SessionService } from 'src/app/service/session.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
+
 export class LoginComponent implements OnInit {
+  account: Account = new Account();
 
   constructor(private sessionSerivice: SessionService) { }
 
@@ -14,7 +17,7 @@ export class LoginComponent implements OnInit {
   }
 
   submitLogin() {
-    this.sessionSerivice.login();
+    this.sessionSerivice.login(this.account);
   }
 
 }

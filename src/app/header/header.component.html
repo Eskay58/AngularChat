@@ -1,9 +1,14 @@
 <nav class="navbar fixed-top navbar-dark bg-primary">
-  <a class="navbar-brand" routerLink="">NgChat</a>
+  <a class="navbar-brand" routerLink="">AmanoChat</a>
   <span class="navbar-text" *ngIf="!login">
-      <a routerLink="account/login">Login</a>
+      <a routerLink="/account/login">Login</a>
   </span>
   <span class="navbar-text" *ngIf="login">
-    <a routerLink="account/login" (click)="logout()">Logout</a>
-</span>
+    <a routerLink="/account/login">Hello! {{ userName }}</a>
+  </span>
+  <span class="navbar-text" *ngIf="login">
+    <a routerLink="/account/login" (click)="logout()">Logout</a>
+  </span>
+
+    
 </nav>

@@ -64,3 +64,14 @@ a.signup-link {
   text-align: center;
   margin: 5px 0 15px;
 }
+
+.form-signup #inputName { 
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+.form-signup #inputEmail {
+  border-radius: 0;
+  border-collapse: collapse;
+  margin-bottom: -1px;
+}

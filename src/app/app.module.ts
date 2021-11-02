@@ -11,6 +11,10 @@ import { SharedModule } from './shared/shared.module';
 import { HeaderComponent } from './header/header.component';
 import { PageNotFoundComponent } from './error/page-not-found/page-not-found.component';
 import { RouterModule } from '@angular/router';
+import { AngularFireModule } from '@angular/fire/compat';
+import { environment } from '../environments/environment';
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore'; // 追加
+import { AngularFireAuthModule } from '@angular/fire/compat/auth'; // 追加
 
 @NgModule({
   declarations: [
@@ -27,6 +31,9 @@ import { RouterModule } from '@angular/router';
     FormsModule,
     SharedModule,
     RouterModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule,
+    AngularFireAuthModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
