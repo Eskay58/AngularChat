@@ -23,8 +23,26 @@
             <a href="#" class="icon-rounded">{{ item.user.name.slice(0, 1) }}</a>
           </div>
           <div class="media-body">
-            <h4 class="media-heading">{{ item.user.name }} Date:{{item.date | chatDate}}</h4>
-            <div>{{ item.content }}</div>
+            <h4 class="media-heading">
+              {{ item.user.name }} Date:{{item.date | chatDate}}
+              <button class="btn btn-primary btn-sm" (click)="toggleEditComment(item)">編集</button>
+              <button class="btn btn-primary btn-sm" (click)="deleteComment(item.key)">削除</button>
+            </h4>
+            <ng-container *ngIf="!item.editFlag">
+              <div>{{ item.content }}</div>
+            </ng-container>
+            <ng-container *ngIf="item.editFlag">
+              <div class="input-group">
+                <input type="text" class="form-control"
+                       [(ngModel)]="item.content"
+                       name="edit_comment">
+              </div>
+              <div class="edit-buttons">
+                <button class="btn btn-success btn-sm" (click)="saveEditComment(item)">保存</button>
+                <button class="btn btn-warning btn-sm" (click)="resetEditComment(item)">リセット</button>
+              </div>
+            </ng-container>
+            
           </div>
           <div class="media-right" *ngIf="item.user.uid === currentUser.uid">
             <a href="#" class="icon-rounded">{{ item.user.name.slice(0, 1) }}</a>
