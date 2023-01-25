@@ -47,8 +47,9 @@ export class ChatComponent implements OnInit {
             // actionの配列からコメントのデータを抽出し新たな配列を作成する
             return actions.map(action => {
               const data = action.payload.doc.data() as Comment;
+              const key = action.payload.doc.id;
               const commentData = new Comment(data.user, data.content);
-              commentData.setDate(data.date);
+              commentData.setData(data.date, key);
               return commentData;
             })
           })
@@ -77,6 +78,38 @@ export class ChatComponent implements OnInit {
       .doc('uid')
       .set(new User('uid', 'amano').deserialize());
     }
+  }
+
+  toggleEditComment(comment: Comment) {
+    comment.editFlag = (!comment.editFlag);
+  }
+
+  saveEditComment(comment: Comment) {
+    this.db
+      .collection('comments')
+      .doc(comment.key)
+      .update({
+        content: comment.content,
+        date: comment.date
+      })
+      .then(() => {
+        alert('コメントを更新しました');
+        comment.editFlag = false;
+      });
+  }
+
+  resetEditComment(comment: Comment) {
+    comment.content = '';
+  }
+
+  deleteComment(key: string | undefined) {
+    this.db
+      .collection('comments')
+      .doc(key)
+      .delete()
+      .then(() => {
+        alert('コメントを削除しました');
+      });
   }
 
 }

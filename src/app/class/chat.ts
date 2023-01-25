@@ -19,6 +19,8 @@ export class Comment {
   user: User;
   content: string;
   date: number;
+  key?: string;
+  editFlag?: boolean;
 
   constructor(user: User, content: string) {
     this.user = user;
@@ -31,8 +33,10 @@ export class Comment {
     return Object.assign({}, this);
   }
 
-  setDate(date: number) {
+  setData(date: number, key: string): Comment {
     this.date = date;
+    this.key = key;
+    this.editFlag = false;
     return this;
   }
 
